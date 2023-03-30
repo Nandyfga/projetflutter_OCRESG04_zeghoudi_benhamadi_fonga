@@ -16,10 +16,14 @@ class LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Login'),
+      body: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/fond.png'),
+              fit: BoxFit.cover,
+        ),
       ),
-      body: BlocProvider(
+      child: BlocProvider(
         create: (context) => AuthBloc(),
         child: BlocListener<AuthBloc, AuthState>(
           listener: (context, state) {
@@ -39,43 +43,114 @@ class LoginScreenState extends State<LoginScreen> {
                 );
               } else {
                 return Padding(
-                  padding: EdgeInsets.all(16.0),
+                  padding: EdgeInsets.fromLTRB(16.0, 80.0, 16.0, 0.0),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                   // mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
+                      Text("Bienvenue !", style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: Colors.white),
+                      ),
+                      SizedBox(
+                        height: 20.0,
+                      ),
+                      Container(
+                        width: 250,
+                        child: Text("Veuillez vous connecter ou créer un nouveau compte pour utiliser l\'application.", textAlign: TextAlign.center,
+                          style: TextStyle(fontSize:20 , fontWeight: FontWeight.normal, color: Colors.white),
+                        ),
+                      ),
+                      SizedBox (
+                        height: 24.0,
+                      ),
                       TextField(
                         controller: _emailController,
-                        decoration: InputDecoration(hintText: 'Email'),
+                        decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Colors.black38,
+                            hintText: 'E-mail', hintStyle: TextStyle(color:Colors.white),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(3.0),
+                              borderSide: BorderSide.none,)),
+                        textAlign: TextAlign.center,
                       ),
                       SizedBox(
                         height: 12.0,
                       ),
                       TextField(
                         controller: _passwordController,
-                        decoration: InputDecoration(hintText: 'Password'),
+                        decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Colors.black38,
+                            hintText: 'Mot de passe', hintStyle: TextStyle(color:Colors.white),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(3.0),
+                              borderSide: BorderSide.none,)),
                         obscureText: true,
+                        textAlign: TextAlign.center,
                       ),
                       SizedBox(
-                        height: 24.0,
+                        height: 50.0,
                       ),
                       ElevatedButton(
                         onPressed: () async {
-                          BlocProvider.of<AuthBloc>(context).onLogin(
-                            _emailController.text,
-                            _passwordController.text,
-                          );
+                          BlocProvider.of<AuthBloc>(context).add(LoginEvent(
+                              email: _emailController.text,
+                              password: _passwordController.text));
                         },
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                            Colors.purple,
+                          ),
+                          foregroundColor: MaterialStateProperty.all<Color>(
+                            Colors.white,
+                          ),
+                          fixedSize: MaterialStateProperty.all<Size>(
+                            Size(470, 55),
+                          ),
+                          textStyle: MaterialStateProperty.all<TextStyle>(
+                            TextStyle(fontSize: 17),
+                          ),
+                        ),
                         child: Text('Se connecter'),
                       ),
                       SizedBox(
-                        height: 12.0,
+                        height: 15.0,
                       ),
                       ElevatedButton(
                         onPressed: () {
                           Navigator.pushNamed(context, '/signup');
                         },
-                        child: Text('Créer un nouveau compte'),
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                            Colors.transparent,
+                          ),
+                          fixedSize: MaterialStateProperty.all<Size>(
+                            Size(470, 55),
+                          ),
+                          textStyle: MaterialStateProperty.all<TextStyle>(
+                            TextStyle(fontSize: 17),
+                          ),
+                          side: MaterialStateProperty.all<BorderSide>(
+                            BorderSide(
+                              color: Colors.purple,
+                            ),
+                          ),
+                        ),
+                        child: Text('Créer un nouveau compte', style: TextStyle(
+                          color: Colors.white),
                       ),
+                      ),
+                      SizedBox(
+                        height: 120.0,
+                      ),
+                      GestureDetector(
+                        child: Text("Mot de passe oublié", style: TextStyle(
+                            decoration: TextDecoration.underline,
+                            color: Colors.grey,
+                          ),
+                        ),
+                        onTap: () {
+                        },
+                      )
                     ],
                   ),
                 );
@@ -84,6 +159,7 @@ class LoginScreenState extends State<LoginScreen> {
           ),
         ),
       ),
+    )
     );
   }
 }

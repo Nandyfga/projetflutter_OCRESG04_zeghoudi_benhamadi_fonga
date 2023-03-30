@@ -13,6 +13,7 @@ void main() async {
   await Firebase.initializeApp();
   runApp(const MyApp());
 }
+//const primaryColor = Color(0xFF151026);
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -21,9 +22,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'My App',
+      /*
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+        primaryColor: primaryColor,
+      ),*/
       home: BlocProvider(
         create: (_) => AuthBloc(),
         child: LoginScreen(),

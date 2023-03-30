@@ -13,11 +13,14 @@ class SignupScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Signup'),
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/fond.png'),
+            fit: BoxFit.cover,
+        ),
       ),
-      backgroundColor: Colors.white, // Ajout de la propriété backgroundColor
-      body: BlocProvider(
+      child: BlocProvider(
         create: (context) => AuthBloc(),
         child: BlocListener<AuthBloc, AuthState>(
           listener: (context, state) {
@@ -36,24 +39,74 @@ class SignupScreen extends StatelessWidget {
                 );
               } else {
                 return Padding(
-                  padding: EdgeInsets.all(16.0),
+                  padding: EdgeInsets.fromLTRB(16.0, 80.0, 16.0, 0.0),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
+                      Text("Inscription", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.white),
+                      ),
+                      SizedBox(
+                        height: 20.0,
+                      ),
+                      Text("Veuillez saisir ces différentes informations, afin que vos listes soient sauvegardées", textAlign: TextAlign.center, style: TextStyle(fontSize: 17, fontWeight: FontWeight.normal, color: Colors.white),
+                      ),
+                      SizedBox(
+                        height: 40.0,
+                      ),
+                      TextField(
+                        decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Colors.black38,
+                            hintText: 'Nom d\'utilisateur', hintStyle: TextStyle(color:Colors.white),
+                            border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(3.0),
+                            borderSide: BorderSide.none,)),
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(
+                        height: 12.0,
+                      ),
                       TextField(
                         controller: _emailController,
-                        decoration: InputDecoration(hintText: 'Email'),
+                        decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Colors.black38,
+                            hintText: 'E-mail', hintStyle: TextStyle(color:Colors.white),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(3.0),
+                              borderSide: BorderSide.none,)),
+                        textAlign: TextAlign.center,
                       ),
                       SizedBox(
                         height: 12.0,
                       ),
                       TextField(
                         controller: _passwordController,
-                        decoration: InputDecoration(hintText: 'Password'),
+                          decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Colors.black38,
+                              hintText: 'Mot de passe', hintStyle: TextStyle(color:Colors.white),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(3.0),
+                                borderSide: BorderSide.none,)),
                         obscureText: true,
+                        textAlign: TextAlign.center,
                       ),
                       SizedBox(
-                        height: 24.0,
+                        height: 12.0,
+                      ),
+                      TextField(
+                        controller: _passwordController,
+                        decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Colors.black38,
+                            hintText: 'Vérification du mot de passe', hintStyle: TextStyle(color:Colors.white),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(3.0),
+                              borderSide: BorderSide.none,)),
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(
+                        height: 70.0,
                       ),
                       ElevatedButton(
                         onPressed: () async {
@@ -83,7 +136,22 @@ class SignupScreen extends StatelessWidget {
                             ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(content: Text(e.toString())));
                           }
+                          Navigator.pushNamed(context, '/home');
                         },
+                        style: ButtonStyle(
+                        fixedSize: MaterialStateProperty.all<Size>(
+                          Size(470, 55),
+                        ),
+                        textStyle: MaterialStateProperty.all<TextStyle>(
+                          TextStyle(fontSize: 17),
+                        ),
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                        Colors.purple,
+                        ),
+                        foregroundColor: MaterialStateProperty.all<Color>(
+                          Colors.white,
+                        ),
+                        ),
                         child: Text('S\'inscrire'),
                       ),
 
@@ -95,6 +163,7 @@ class SignupScreen extends StatelessWidget {
           ),
         ),
       ),
+    )
     );
   }
 }
