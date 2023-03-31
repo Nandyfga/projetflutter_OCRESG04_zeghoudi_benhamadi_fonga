@@ -71,6 +71,7 @@ class LoginScreenState extends State<LoginScreen> {
                               borderRadius: BorderRadius.circular(3.0),
                               borderSide: BorderSide.none,)),
                         textAlign: TextAlign.center,
+                        style: TextStyle(color: Colors.white),
                       ),
                       SizedBox(
                         height: 12.0,
@@ -86,6 +87,7 @@ class LoginScreenState extends State<LoginScreen> {
                               borderSide: BorderSide.none,)),
                         obscureText: true,
                         textAlign: TextAlign.center,
+                        style: TextStyle(color: Colors.white),
                       ),
                       SizedBox(
                         height: 50.0,
