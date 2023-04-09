@@ -1,9 +1,53 @@
 import 'package:flutter/material.dart';
 import 'package:untitled1/models/game.dart';
 import 'package:untitled1/blocs/api/api.dart';
+import 'steam_game_details.dart';
 
 
-class HomeScreen extends StatefulWidget {
+class SteamGamesList extends StatelessWidget {
+  final Future<List<SteamGame>> _futureGames = SteamApi.fetchMostPlayedGames();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Most played games on Steam'),
+      ),
+      body: FutureBuilder<List<SteamGame>>(
+        future: _futureGames,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            final games = snapshot.data!;
+            return ListView.builder(
+              itemCount: games.length,
+              itemBuilder: (context, index) {
+                final game = games[index];
+                return Card(
+                  child: ListTile(
+                    leading: Image.network(game.imageUrl),
+                    title: Text(game.name),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => SteamGameDetails(game: game)),
+                      );
+                    },
+                  ),
+                );
+              },
+            );
+          } else if (snapshot.hasError) {
+            return Text('${snapshot.error}');
+          }
+          return Center(child: CircularProgressIndicator());
+        },
+      ),
+    );
+  }
+}
+
+
+/*class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
@@ -25,7 +69,7 @@ class _HomePageState extends State<HomeScreen> {
       appBar: AppBar(
         title: const Text('Accueil'),
       ),
-      body: FutureBuilder<Game>(
+      body:FutureBuilder<Game>(
         future: futureGame,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -37,7 +81,7 @@ class _HomePageState extends State<HomeScreen> {
                 final rank = snapshot.data!.response!.ranks![index];
                 return ListTile(
                   title: Text('Rank ${rank.rank}'),
-                  subtitle: Text('AppID: ${rank.appid}, Peak in game: ${rank.peakInGame}'),
+                  subtitle: Text('AppID: ${rank.appid}, Peak in game: ${rank.peakInGame}}'),
                 );
               },
             );
@@ -49,70 +93,50 @@ class _HomePageState extends State<HomeScreen> {
       ),
     );
   }
-}
+}*/
 
-
-
-/*import 'package:flutter/material.dart';
-import 'package:untitled1/models/game.dart';
-import 'package:untitled1/blocs/api/api.dart';
-
-
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
-
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomeScreen> {
-  late Future<List<Game>> futureGame;
-
-  @override
-  void initState() {
-    super.initState();
-    futureGame = fetchGameData();
-  }
-
-  @override
+/*@override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Accueil'),
       ),
-      body: FutureBuilder<List<Game>>(
+      body: FutureBuilder<Game>(
         future: futureGame,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 0.8,
-              ),
-              itemCount: snapshot.data!.length,
-              itemBuilder: (context, index) {
-                final game = snapshot.data![index];
-                return Card(
-                  child: Column(
-                    children: [
-                      Image.network(game.imageUrl),
-                      Text(game.name),
-                      Text('Price: ${game.price}'),
-                      ],
-              ),
+            final game = snapshot.data!;
+            if (game.response != null && game.response!.ranks != null) {
+              return ListView.builder(
+                itemCount: game.response!.ranks!.length,
+                itemBuilder: (context, index) {
+                  final rank = game.response!.ranks![index];
+                  return ListTile(
+                    leading: Image.network(rank.logoUrl!),
+                    title: Text(rank.name!),
+                    subtitle: Text('Position : ${rank.rank}'),
+                  );
+                },
               );
-              },
+            } else {
+              return Center(
+                child: Text('Aucune donnée trouvée'),
               );
+            }
           } else if (snapshot.hasError) {
-            return Text('Error: ${snapshot.error}');
+            return Center(
+              child: Text('Erreur: ${snapshot.error}'),
+            );
           } else {
-            return CircularProgressIndicator();
+            return const Center(child: CircularProgressIndicator());
           }
         },
       ),
     );
   }
 }*/
+
+
 
 
 

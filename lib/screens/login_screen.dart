@@ -4,6 +4,7 @@ import 'package:untitled1/blocs/auth/auth_bloc.dart';
 import 'package:untitled1/blocs/auth/auth_event.dart';
 import 'package:untitled1/blocs/auth/auth_state.dart';
 
+
 class LoginScreen extends StatefulWidget {
   @override
   LoginScreenState createState() => LoginScreenState();
@@ -16,7 +17,8 @@ class LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+      body: SingleChildScrollView(
+      child: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage('assets/fond.png'),
@@ -162,6 +164,7 @@ class LoginScreenState extends State<LoginScreen> {
         ),
       ),
     )
+      )
     );
   }
 }
