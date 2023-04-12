@@ -2,14 +2,23 @@ class SteamGame {
   final String name;
   final String appId;
   final String imageUrl;
+  final String shortDescription;
+  //final String publishers;
+  //final String price;
+  //final String description;
 
-  SteamGame({required this.name, required this.appId, required this.imageUrl});
+  SteamGame({required this.name, required this.appId, required this.imageUrl, required this.shortDescription});
+    //required this.publishers required this.price, required this.description
 
   factory SteamGame.fromJson(Map<String, dynamic> json) {
     return SteamGame(
-      name: json['name'],
+      name: json['name'] ?? '',
       appId: json['appid'].toString(),
-      imageUrl: json['img_logo_url'],
+      imageUrl: json['header_image'],
+      shortDescription: json['short_description'] ?? '',
+      //publishers: json ['publishers'] ?? '',
+      //price: json ['is_free'].toString(),
+      //description: json ['detailed_description'] ?? '',
     );
   }
 }
