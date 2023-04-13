@@ -3,27 +3,34 @@ class SteamGame {
   final String appId;
   final String imageUrl;
   final String shortDescription;
-  //final String publishers;
-  //final String price;
-  //final String description;
+  final String publishers;
+  final String price;
+  final String description;
 
-  SteamGame({required this.name, required this.appId, required this.imageUrl, required this.shortDescription});
+  SteamGame({required this.name, required this.appId, required this.imageUrl, required this.shortDescription, required this.publishers,
+    required this.price, required this.description});
     //required this.publishers required this.price, required this.description
 
   factory SteamGame.fromJson(Map<String, dynamic> json) {
+    final gameData = json['data'];
+
     return SteamGame(
-      name: json['name'] ?? '',
+      name: gameData['name'] ?? '',
       appId: json['appid'].toString(),
-      imageUrl: json['header_image'],
-      shortDescription: json['short_description'] ?? '',
-      //publishers: json ['publishers'] ?? '',
-      //price: json ['is_free'].toString(),
-      //description: json ['detailed_description'] ?? '',
+      imageUrl: gameData['header_image'] ?? '',
+      shortDescription: gameData['short_description'] ?? '',
+      publishers: gameData['publishers'] != null ? gameData['publishers'].join(', ') : '',
+      price: gameData['is_free'] == true
+          ? 'Free to play'
+          : gameData['price_overview'] != null && gameData['price_overview']['final_formatted'] != null
+          ? gameData['price_overview']['final_formatted']
+          : '',
+      description: gameData['detailed_description'] ?? '',
     );
   }
 }
 
-
+/**/
 
 /*class Game {
   Response? response;

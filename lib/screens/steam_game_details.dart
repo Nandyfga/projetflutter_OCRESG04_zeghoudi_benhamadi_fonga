@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:untitled1/models/game.dart';
+import 'view_screen.dart';
 
-class GameDetailsPage extends StatelessWidget {
+class GameDetailsScreen extends StatelessWidget {
   final SteamGame game;
 
-  const GameDetailsPage({Key? key, required this.game}) : super(key: key);
+  const GameDetailsScreen({Key? key, required this.game}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,49 +13,88 @@ class GameDetailsPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Détail du jeu'),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Expanded(
-            flex: 3,
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Image.network(game.imageUrl),
-            ),
-          ),
-          Expanded(
-            flex: 2,
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Image.network(game.imageUrl),
+            Card(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Row(
                     children: [
-                      Image.network(game.imageUrl),
-                      SizedBox(height: 16.0),
-                      Text(
-                        game.name,
-                        style: Theme.of(context).textTheme.headline5,
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          child: Text('DESCRIPTION'),
+                          style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(5),
+                                topRight: Radius.circular(0),
+                                bottomLeft: Radius.circular(5),
+                                bottomRight: Radius.circular(0),
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
-                      SizedBox(height: 8.0),
-                      Text(
-                        game.publishers,
-                        style: Theme.of(context).textTheme.subtitle1,
-                      ),
-                      SizedBox(height: 16.0),
-                      Text(
-                        game.description,
-                        style: Theme.of(context).textTheme.bodyText1,
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ViewScreen(game: game),
+                              ),
+                            );
+                          },
+                          child: Text('AVIS'),
+                          style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(0),
+                                topRight: Radius.circular(5),
+                                bottomLeft: Radius.circular(0),
+                                bottomRight: Radius.circular(5),
+                              ),
+                            ),
+                            backgroundColor: Colors.transparent,
+                            side: BorderSide(color: Colors.blue),
+                          ),
+                        ),
                       ),
                     ],
                   ),
-                ),
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Text(
+                      game.name,
+                      style: Theme
+                          .of(context)
+                          .textTheme
+                          .headline5,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Text(
+                      game.description,
+                      style: Theme
+                          .of(context)
+                          .textTheme
+                          .bodyText1,
+                    ),
+                  ),
+                ],
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 }
+
+

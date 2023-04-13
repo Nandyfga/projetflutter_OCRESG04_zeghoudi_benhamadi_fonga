@@ -26,43 +26,28 @@ class SteamApi {
   }
 
 
-  static Future<SteamGame> fetchGameDetails(String appId) async {
+  static Future<SteamGame?> fetchGameDetails(String appId) async {
     final response = await http.get(Uri.parse(
         'https://store.steampowered.com/api/appdetails?appids=$appId'));
 
     if (response.statusCode == 200) {
       final Map<String, dynamic> data = jsonDecode(response.body);
       final gameData = data[appId]['data'];
-      print(gameData);
       if (gameData != null && gameData['name'] != null) {
         final game = SteamGame(
           name: gameData['name'],
           appId: appId,
           imageUrl: gameData['header_image'] ?? '',
           shortDescription: gameData['short_description'] ?? '',
-          publishers: gameData['publishers'] != null
-              ? gameData['publishers'].join(', ')
-              : '',
-          price: gameData['is_free'] == true
-              ? 'Free to play'
-              : (gameData['price_overview'] != null
-              ? gameData['price_overview']['final_formatted'] ?? ''
-              : ''),
-          description: gameData['detailed_description'] ?? '',
+          publishers: gameData['publishers'] ?? '',
+          price: gameData ['is_free'] ?? '',
+          description: gameData ['detailed_description'] ?? '',
         );
-        print(game);
         return game;
       }
     }
-    return SteamGame(
-      name: '',
-      appId: '',
-      imageUrl: '',
-      shortDescription: '',
-      publishers: '',
-      price: '',
-      description: '',
-    );
+    return null;
+    //return Future.value(null); // retourner null si la condition n'est pas satisfaite
   }
 
   static Future<List<SteamGame>> fetchMostPlayedGames() async {
@@ -79,15 +64,3 @@ class SteamApi {
     return games;
   }
 }
-
-
-
-/*Future<Game> fetchGameData() async {
-  final response = await http.get(Uri.parse('https://api.steampowered.com/ISteamChartsService/GetMostPlayedGames/v1/?'));
-  if (response.statusCode == 200) {
-    final Map<String, dynamic> data = jsonDecode(response.body);
-    return Game.fromJson(data);
-  } else {
-    throw Exception('Failed to fetch game data');
-  }
-}*/

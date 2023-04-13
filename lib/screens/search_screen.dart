@@ -26,7 +26,7 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Accueil'),
+        title: Text('Recherche'),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -36,7 +36,7 @@ class _SearchScreenState extends State<SearchScreen> {
             padding: const EdgeInsets.all(10.0),
             child: TextField(
               decoration: InputDecoration(
-                hintText: 'Rechercher un jeu',
+                hintText: 'Rechercher un jeu...',
                 border: OutlineInputBorder(),
                 contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
               ),
@@ -57,7 +57,6 @@ class _SearchScreenState extends State<SearchScreen> {
                         child: ListTile(
                           leading: Image.network(game.imageUrl),
                           title: Text(game.name),
-                          //subtitle: Text('${game.publishers} • ${game.price}'),
                         ),
                         ),
                       );
