@@ -14,7 +14,9 @@ class SearchScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Recherche'),
+        backgroundColor: Color(0xFF1A2025),
       ),
+      backgroundColor: Color(0xFF1A2025),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -22,7 +24,7 @@ class SearchScreen extends StatelessWidget {
             padding: const EdgeInsets.all(10.0),
             child: TextField(
               decoration: InputDecoration(
-                hintText: 'Rechercher un jeu...',
+                hintText: 'Rechercher un jeu...',hintStyle: TextStyle(color:Colors.white),
                 border: OutlineInputBorder(),
                 contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
               ),
@@ -33,7 +35,7 @@ class SearchScreen extends StatelessWidget {
             padding: EdgeInsets.all(16.0),
             child: Text(
               'Nombre de résultats: ${games.length}',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, decoration: TextDecoration.underline),
+              style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold, decoration: TextDecoration.underline),
             ),
           ),
           Expanded(
@@ -45,16 +47,17 @@ class SearchScreen extends StatelessWidget {
                   width: 400,
                   height: 120,
                   child: Card(
+                    color : Color(0xFF1A2025),
                     child: ListTile(
                       contentPadding: EdgeInsets.symmetric(vertical: 10),
                       leading: Image.network(game.imageUrl),
-                      title: Text(game.name),
+                      title: Text(game.name,style: TextStyle(color: Colors.white)),
                       subtitle: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(game.publishers),
+                          Text(game.publishers, style: TextStyle(color: Colors.white)),
                           SizedBox(height: 5),
-                          Text(game.price),
+                          Text(game.price, style: TextStyle(color: Colors.white)),
                         ],
                       ),
                       trailing: ElevatedButton(
