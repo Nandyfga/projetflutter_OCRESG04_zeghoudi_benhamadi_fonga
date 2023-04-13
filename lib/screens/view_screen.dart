@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:untitled1/models/game.dart';
 import 'steam_game_details.dart';
+import 'like_screen.dart';
+import 'wishlist_screen.dart';
 
 class ViewScreen extends StatelessWidget {
   final SteamGame game;
@@ -12,6 +14,35 @@ class ViewScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Détail du jeu'),
+        actions: [
+          Row(
+            children: [
+              IconButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MesLikes(),
+                    ),
+                  );
+                },
+                icon: Icon(Icons.favorite),
+              ),
+              IconButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Wishlist(),
+                    ),
+                  );
+                },
+                icon: Icon(Icons.star,
+              ),
+              ),
+            ],
+          ),
+        ],
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,

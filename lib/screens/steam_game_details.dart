@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:untitled1/models/game.dart';
+import 'like_screen.dart';
+import 'wishlist_screen.dart';
 import 'view_screen.dart';
 
 class GameDetailsScreen extends StatelessWidget {
@@ -12,6 +14,36 @@ class GameDetailsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Détail du jeu'),
+        actions: [
+          Row(
+            children: [
+              IconButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MesLikes(),
+                    ),
+                  );
+                },
+                icon: Icon(Icons.favorite_border),
+                color: Colors.white,
+              ),
+              IconButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Wishlist(),
+                    ),
+                  );
+                },
+                icon: Icon(Icons.star_border),
+                color: Colors.white,
+              ),
+            ],
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
