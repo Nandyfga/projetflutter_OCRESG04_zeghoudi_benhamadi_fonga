@@ -21,7 +21,7 @@ class LoginScreenState extends State<LoginScreen> {
       child: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/fond.png'),
+              image: AssetImage('images/fond.png'),
               fit: BoxFit.cover,
         ),
       ),

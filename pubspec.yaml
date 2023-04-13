@@ -71,7 +71,9 @@ flutter:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
   assets:
-    - assets/fond.png
+    - images/fond.png
+    - images/like.png
+    - images/wishlist.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
