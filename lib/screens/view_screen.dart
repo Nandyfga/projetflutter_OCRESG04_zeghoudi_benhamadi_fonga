@@ -14,6 +14,7 @@ class ViewScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Détail du jeu'),
+        backgroundColor: Color(0xFF1A2025),
         actions: [
           Row(
             children: [
@@ -44,11 +45,13 @@ class ViewScreen extends StatelessWidget {
           ),
         ],
       ),
+      backgroundColor: Color(0xFF1A2025),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
          Image.network(game.imageUrl),
           Card(
+            color: Color(0xFF1A2025),
             child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
@@ -94,6 +97,8 @@ class ViewScreen extends StatelessWidget {
                                   bottomRight: Radius.circular(5),
                                 ),
                               ),
+                              backgroundColor: Color(0xFF8860FC),
+                              side: BorderSide(color: Colors.deepPurpleAccent),
                             ),
                           ),
                         ),

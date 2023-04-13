@@ -102,7 +102,7 @@ class LoginScreenState extends State<LoginScreen> {
                         },
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(
-                            Colors.purple,
+                            Colors.deepPurpleAccent,
                           ),
                           foregroundColor: MaterialStateProperty.all<Color>(
                             Colors.white,
@@ -135,7 +135,7 @@ class LoginScreenState extends State<LoginScreen> {
                           ),
                           side: MaterialStateProperty.all<BorderSide>(
                             BorderSide(
-                              color: Colors.purple,
+                              color: Colors.deepPurpleAccent,
                             ),
                           ),
                         ),

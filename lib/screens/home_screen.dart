@@ -96,6 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 border: OutlineInputBorder(),
                 contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
               ),
+              style: TextStyle(color: Colors.white),
             ),
           ),
           Expanded(

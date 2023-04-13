@@ -26,6 +26,7 @@ class SearchScreen extends StatelessWidget {
                 border: OutlineInputBorder(),
                 contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
               ),
+              style: TextStyle(color: Colors.white),
             ),
           ),
           Padding(

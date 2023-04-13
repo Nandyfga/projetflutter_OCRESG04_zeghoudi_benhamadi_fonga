@@ -26,8 +26,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: BlocProvider(
         create: (_) => AuthBloc(),
-        child: LoginScreen(),
-        //child: HomeScreen(),
+        //child: LoginScreen(),
+        child: HomeScreen(),
       ),
       routes: {
         '/home': (context) => HomeScreen(),

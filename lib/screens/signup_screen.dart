@@ -150,7 +150,7 @@ class SignupScreen extends StatelessWidget {
                           TextStyle(fontSize: 17),
                         ),
                         backgroundColor: MaterialStateProperty.all<Color>(
-                        Colors.purple,
+                        Colors.deepPurpleAccent,
                         ),
                         foregroundColor: MaterialStateProperty.all<Color>(
                           Colors.white,

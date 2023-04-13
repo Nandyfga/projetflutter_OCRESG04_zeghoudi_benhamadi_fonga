@@ -14,6 +14,7 @@ class GameDetailsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Détail du jeu'),
+        backgroundColor: Color(0xFF1A2025),
         actions: [
           Row(
             children: [
@@ -45,12 +46,14 @@ class GameDetailsScreen extends StatelessWidget {
           ),
         ],
       ),
+      backgroundColor: Color(0xFF1A2025),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Image.network(game.imageUrl),
             Card(
+              color: Color(0xFF1A2025),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -69,6 +72,8 @@ class GameDetailsScreen extends StatelessWidget {
                                 bottomRight: Radius.circular(0),
                               ),
                             ),
+                            backgroundColor: Color(0xFF8860FC),
+                            side: BorderSide(color: Colors.deepPurpleAccent),
                           ),
                         ),
                       ),
@@ -93,7 +98,7 @@ class GameDetailsScreen extends StatelessWidget {
                               ),
                             ),
                             backgroundColor: Colors.transparent,
-                            side: BorderSide(color: Colors.blue),
+                            side: BorderSide(color: Colors.deepPurpleAccent),
                           ),
                         ),
                       ),
@@ -107,6 +112,7 @@ class GameDetailsScreen extends StatelessWidget {
                           .of(context)
                           .textTheme
                           .headline5,
+
                     ),
                   ),
                   Padding(
